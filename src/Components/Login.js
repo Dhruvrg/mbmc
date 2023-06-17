@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { auth } from "../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import userContext from "../context/userContext";
 
 const Login = () => {
+  const context = useContext(userContext);
+  const { setUserEmail } = context;
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -20,6 +24,7 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email.trim(), password.trim());
       toast("Login Successfully", "success");
+      setUserEmail(email.trim());
       if (email.slice(0, -10).slice(-3) === "108") {
         localStorage.setItem("cred", true);
       }
