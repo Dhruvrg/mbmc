@@ -1,14 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../config/firebase";
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   let navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("id");
-    localStorage.removeItem("cred");
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      localStorage.removeItem("cred");
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -32,7 +38,7 @@ const Navbar = () => {
         Upload
       </Link>
       <div className="absolute right-[2.5vw]">
-        {!localStorage.getItem("id") ? (
+        {auth?.currentUser?.email === undefined ? (
           <form className="flex gap-[2.5vw]">
             <Link
               className="hover:font-bold hover:text-[#86B049] focus:text-[#86B049] focus:scale-x-105"

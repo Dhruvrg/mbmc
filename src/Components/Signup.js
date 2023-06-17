@@ -1,15 +1,14 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import userContext from "../context/userContext";
+import { auth } from "../config/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Signup = () => {
-  const context = useContext(userContext);
-  const { url } = context;
   const [credentials, setCredentials] = useState({
-    name: "",
+    email: "",
     password: "",
     cpassword: "",
   });
@@ -17,28 +16,21 @@ const Signup = () => {
 
   const signUp = async (e) => {
     e.preventDefault();
-    const { name, password, cpassword } = credentials;
-    if (password === cpassword) {
-      const response = await fetch(`${url}/users.json`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, password }),
-      });
-      const json = await response.json();
-      if (name.slice(-3) === "108") {
+    const { email, password, cpassword } = credentials;
+    if (password !== cpassword) {
+      toast("Both the Password must be same", "danger");
+      return;
+    }
+    try {
+      await createUserWithEmailAndPassword(auth, email.trim(), password.trim());
+      if (email.slice(0, -10).slice(-3) === "108") {
         localStorage.setItem("cred", true);
       }
-      if (json.name) {
-        toast("Login Successfully", "success");
-        localStorage.setItem("id", json.name);
-        navigate("/");
-      } else {
-        toast("Invalid Detials", "danger");
-      }
-    } else {
-      toast("Both the Password must be same", "danger");
+      toast("Account created Successfully", "success");
+      navigate("/");
+    } catch (error) {
+      toast("Invalid Detials", "danger");
+      console.error(error);
     }
   };
 
@@ -52,11 +44,12 @@ const Signup = () => {
         <ToastContainer />
         <form onSubmit={signUp}>
           <div className="flex flex-col mb-5">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="email">Email</label>
             <input
               type="text"
-              id="name"
-              name="name"
+              id="email"
+              name="email"
+              value={credentials.email}
               onChange={onChange}
               aria-describedby="emailHelp"
               className="bg-[#011B10] border-b-2 border-white"
@@ -70,6 +63,7 @@ const Signup = () => {
               onChange={onChange}
               minLength={5}
               required
+              value={credentials.password}
               id="password"
               className="bg-[#011B10] border-b-2 border-white"
             />
@@ -82,6 +76,7 @@ const Signup = () => {
               onChange={onChange}
               minLength={5}
               required
+              value={credentials.cpassword}
               id="cpassword"
               className="bg-[#011B10] border-b-2 border-white"
             />

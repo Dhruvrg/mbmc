@@ -1,41 +1,32 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import userContext from "../context/userContext";
+import { auth } from "../config/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
-  const context = useContext(userContext);
-  const { url } = context;
   const [credentials, setCredentials] = useState({
-    name: "",
+    email: "",
     password: "",
   });
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, password } = credentials;
-    const response = await fetch(`${url}/users.json`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const json = await response.json();
-    const data = Object.entries(json).filter(
-      (item) => item[1].name === name && item[1].password === password
-    );
-    if (name.slice(-3) === "108") {
-      localStorage.setItem("cred", true);
-    }
-    if (data.length !== 0) {
+    const { email, password } = credentials;
+
+    try {
+      await signInWithEmailAndPassword(auth, email.trim(), password.trim());
       toast("Login Successfully", "success");
-      localStorage.setItem("id", data[0][0]);
+      if (email.slice(0, -10).slice(-3) === "108") {
+        localStorage.setItem("cred", true);
+      }
       navigate("/");
-    } else {
+    } catch (error) {
       toast("Invalid Detials", "danger");
+      console.error(error);
     }
   };
 
@@ -50,13 +41,13 @@ const Login = () => {
           <ToastContainer />
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col mb-[5vh]">
-              <label htmlFor="phoneNo">Name</label>
+              <label htmlFor="phoneNo">Email</label>
               <input
                 type="text"
-                id="name"
-                name="name"
+                id="email"
+                name="email"
                 onChange={onChange}
-                value={credentials.name}
+                value={credentials.email}
                 aria-describedby="emailHelp"
                 className="bg-[#011B10] text-white border-b-2 border-white"
               />
