@@ -37,6 +37,12 @@ const Navbar = () => {
       >
         Upload
       </Link>
+      <Link
+        className="hover:font-bold hover:text-[#86B049] focus:text-[#86B049] focus:scale-x-105"
+        to="/contact"
+      >
+        Contact Us
+      </Link>
       <div className="absolute right-[2.5vw]">
         {auth?.currentUser?.email === undefined ? (
           <form className="flex gap-[2.5vw]">

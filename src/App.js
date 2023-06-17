@@ -6,6 +6,7 @@ import "./App.css";
 import Upload from "./Components/Upload";
 import Signup from "./Components/Signup";
 import Login from "./Components/Login";
+import Contact from "./Components/Contact";
 import UserState from "./context/UserState";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route exact path="/upload" element={<Upload />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
+            <Route exact path="/contact" element={<Contact />} />
           </Routes>
           <About />
         </Router>
