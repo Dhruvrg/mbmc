@@ -1,29 +1,50 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import userContext from "../context/userContext";
+import { deleteObject, ref } from "firebase/storage";
+import { storage } from "../config/firebase";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UploadItem = ({ user }) => {
   const context = useContext(userContext);
-  const { fileList } = context;
-  let userFile = fileList.find((item) => item[1].userid === user[0]);
-  userFile = userFile !== undefined ? userFile[1].file : "Empty";
-  // const blob = new Blob([binaryData], { type: "application/pdf" });
-  var blob = new Blob([userFile], { type: "text/plain" });
-  var file = new File([blob], "document.txt", { type: "text/plain" });
+  const { list, allUsers, allFiles } = context;
+
+  useEffect(() => {
+    allUsers();
+    allFiles();
+  }, []);
+
+  const file = list.filter(
+    (item) => item.name.split(".")[0] === user.slice(0, -10)
+  );
+
+  const deleteAFile = async () => {
+    try {
+      await deleteObject(ref(storage, `${file[0]?.name}`));
+      toast("File Deleted Successfully", "success");
+    } catch (error) {
+      toast("Some error occur", "danger");
+      console.log(error);
+    }
+  };
 
   return (
-    <div className="border-black md:w-[40vw] border-2 h-[7.5vh] rounded-md font-bold flex p-3 space-x-6 bg-[#5B9A18] hover:bg-[#71B81D] hover:p-4">
-      <div className="flex-1">{user[1].name}</div>
-      <a href={URL.createObjectURL(file)} target="_blank">
+    <div className="border-black md:w-[40vw] border-2 h-[7.5vh] rounded-md font-bold flex p-3 space-x-10 bg-[#5B9A18] hover:bg-[#71B81D] hover:p-4">
+      <div className="flex-1">{user.slice(0, -10)}</div>
+      <a href={file[0]?.url} target="_blank">
         <i className="fa-solid fa-eye"></i>
       </a>
-      <a href={URL.createObjectURL(file)} download target="_blank">
+      <a href={file[0]?.url} download>
         <i className="fa-solid fa-download"></i>
+      </a>
+      <a onClick={() => deleteAFile()} href={file[0]?.url} download>
+        <i className="fa-solid fa-trash-can"></i>
       </a>
       <div className="flex">
         <div>Status : </div>
         <div
           style={{
-            backgroundColor: `${userFile === "Empty" ? "#FF0000" : "#32CD32"}`,
+            backgroundColor: `${file.length === 0 ? "#FF0000" : "#32CD32"}`,
           }}
           className="rounded-full border-[0.5px] border-black w-[2.5vh] h-[2.5vh] mt-1"
         ></div>

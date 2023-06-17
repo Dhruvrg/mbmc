@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { auth } from "../config/firebase";
+import { auth, db } from "../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import userContext from "../context/userContext";
 
 const Signup = () => {
+  const context = useContext(userContext);
+  const { setUserEmail } = context;
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -26,7 +30,13 @@ const Signup = () => {
       if (email.slice(0, -10).slice(-3) === "108") {
         localStorage.setItem("cred", true);
       }
+      await updateDoc(
+        doc(db, "users", "8GkRn61xaMk4S6thbi87"),
+        "allusers",
+        arrayUnion(email.trim())
+      );
       toast("Account created Successfully", "success");
+      setUserEmail(email.trim());
       navigate("/");
     } catch (error) {
       toast("Invalid Detials", "danger");

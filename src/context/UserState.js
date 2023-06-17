@@ -1,39 +1,56 @@
 import { useState } from "react";
 import UserContext from "./userContext";
+import { collection, getDocs } from "firebase/firestore";
+import { db, storage } from "../config/firebase";
+import { getDownloadURL, listAll, ref } from "firebase/storage";
 
 const UserState = (props) => {
-  const url = "https://doit-44638-default-rtdb.firebaseio.com";
   const key = "108";
   const [list, setList] = useState([]);
-  const [fileList, setFileList] = useState([]);
+  const [users, setUser] = useState([]);
   const [count, setCount] = useState(0);
+  const [userEmail, setUserEmail] = useState("");
+
   const allUsers = async () => {
-    const response = await fetch(`${url}/users.json`, {
-      method: "GET",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
-    const json = await response.json();
-    setList(Object.entries(json));
-    const data = list.filter((user) => user[1].name.slice(-3) === key);
-    setCount(data.length);
+    try {
+      const data = await getDocs(collection(db, "users"));
+      setUser(
+        data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0].allusers
+      );
+      const admins = users.filter((item) => item.slice(-13, -10) === "108");
+      setCount(admins.length);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const allFiles = async () => {
-    const response = await fetch(`${url}/files.json`, {
-      method: "GET",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
+    const data = await listAll(ref(storage));
+    if (data.items.length <= list.length) {
+      return;
+    }
+    const temp = [];
+    data.items.forEach((item) => {
+      getDownloadURL(item).then((url) => {
+        temp.push({ url: url, name: item._location.path_ });
+      });
     });
-    const json = await response.json();
-    setFileList(Object.entries(json));
+    setList(temp);
   };
 
   return (
     <UserContext.Provider
-      value={{ list, allUsers, fileList, allFiles, count, url, key }}
+      value={{
+        list,
+        count,
+        key,
+        users,
+        allUsers,
+        allFiles,
+        userEmail,
+        setUserEmail,
+        count,
+      }}
     >
       {props.children}
     </UserContext.Provider>
