@@ -1,95 +1,18 @@
-import { useState } from "react";
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { auth } from "../config/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import signupImg from "../Data/signup.webp"
+import Template from "./Template"
 
-const Signup = () => {
-  const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
-    cpassword: "",
-  });
-  let navigate = useNavigate();
-
-  const signUp = async (e) => {
-    e.preventDefault();
-    const { email, password, cpassword } = credentials;
-    if (password !== cpassword) {
-      toast("Both the Password must be same", "danger");
-      return;
-    }
-    try {
-      await createUserWithEmailAndPassword(auth, email.trim(), password.trim());
-      if (email.slice(0, -10).slice(-3) === "108") {
-        localStorage.setItem("cred", true);
-      }
-      toast("Account created Successfully", "success");
-      navigate("/");
-    } catch (error) {
-      toast("Invalid Detials", "danger");
-      console.error(error);
-    }
-  };
-
-  const onChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
-
+function Signup() {
   return (
-    <div className="flex flex-col h-[100vh] w-[100vw] justify-center items-center bg-[#86B049] text-white">
-      <div className="bg-[#011B10] p-[7.5vw] md:p-[2.5vw] rounded-2xl md:w-[20vw] md:justify-center flex items-center h-[50vh]">
-        <ToastContainer />
-        <form onSubmit={signUp}>
-          <div className="flex flex-col mb-5">
-            <label htmlFor="email">Email</label>
-            <input
-              type="text"
-              id="email"
-              name="email"
-              value={credentials.email}
-              onChange={onChange}
-              aria-describedby="emailHelp"
-              className="bg-[#011B10] border-b-2 border-white"
-            />
-          </div>
-          <div className="flex flex-col mb-5">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              onChange={onChange}
-              minLength={5}
-              required
-              value={credentials.password}
-              id="password"
-              className="bg-[#011B10] border-b-2 border-white"
-            />
-          </div>
-          <div className="flex flex-col mb-5">
-            <label htmlFor="cpassword">Comfirm Password</label>
-            <input
-              type="password"
-              name="cpassword"
-              onChange={onChange}
-              minLength={5}
-              required
-              value={credentials.cpassword}
-              id="cpassword"
-              className="bg-[#011B10] border-b-2 border-white"
-            />
-          </div>
-          <div className="text-center mt-[5vh]">
-            <button className=" text-white font-bold" type="submit">
-              SIGN UP
-            </button>
-          </div>
-        </form>
-      </div>
+    <div className=" bg-richblack-900">
+    <Template
+      title="Join the millions learning to code with StudyNotion for free"
+      description1="Build skills for today, tomorrow, and beyond."
+      description2="Education to future-proof your career."
+      image={"https://cdn.dribbble.com/users/1897588/screenshots/3820679/login.gif"}
+      formType="signup"
+    />
     </div>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup
