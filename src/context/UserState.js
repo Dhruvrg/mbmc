@@ -10,6 +10,7 @@ const UserState = (props) => {
   const [users, setUser] = useState([]);
   const [count, setCount] = useState(0);
   const [userEmail, setUserEmail] = useState("");
+  const [excelData, setExcelData] = useState([]);
 
   const allUsers = async () => {
     try {
@@ -38,6 +39,20 @@ const UserState = (props) => {
     setList(temp);
   };
 
+  const twoDArray = () => {
+    let result = [];
+    users.forEach((user) => {
+      const file = list.filter(
+        (item) => item.name.split(".")[0] === user.slice(0, -10)
+      );
+      result.push([
+        user,
+        file[0]?.url === undefined ? "Not Uploaded" : file[0]?.url,
+      ]);
+    });
+    setExcelData(result);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -50,6 +65,8 @@ const UserState = (props) => {
         userEmail,
         setUserEmail,
         count,
+        twoDArray,
+        excelData,
       }}
     >
       {props.children}

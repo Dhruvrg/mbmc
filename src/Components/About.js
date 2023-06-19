@@ -2,7 +2,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="bg-[#011B10] p-[2.5vh] mb-0">
+    <div className="bg-[#192841] p-[2.5vh] mb-0">
       <h2 className="text-white text-center font-bold text-4xl">About us</h2>
       <div className="text-white flex gap-[5vw] md:gap-[2.5vw] mt-[5vh] justify-center text-4xl">
         <a href="mailto:dhruvrg2003@gmail.com?subject = Feedback&body = Message">

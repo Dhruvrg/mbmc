@@ -61,7 +61,7 @@ const Upload = () => {
   };
 
   return (
-    <div className="w-[100vw] min-h-[100vh] pb-[0.5vh] md:pb-[2.5vh] pt-[8vh] bg-[#86B049]">
+    <div className="w-[100vw] min-h-[100vh] pb-[0.5vh] md:pb-[2.5vh] pt-[8vh] bg-richblack-900 text-white">
       {!localStorage.getItem("cred") ? (
         <div className="flex h-[90vh] justify-center items-center flex-col">
           <ToastContainer />
