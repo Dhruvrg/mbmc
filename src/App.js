@@ -8,6 +8,7 @@ import Signup from "./Components/Signup";
 import Login from "./Components/Login";
 import Contact from "./Components/Contact";
 import UserState from "./context/UserState";
+import ExcelData from "./Components/ExcelData.js";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/contact" element={<Contact />} />
+            <Route exact path="/exceldata" element={<ExcelData />} />
           </Routes>
           <About />
         </Router>

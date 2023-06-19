@@ -29,7 +29,7 @@ const UploadItem = ({ user }) => {
   };
 
   return (
-    <div className="border-black md:w-[40vw] border-2 h-[7.5vh] rounded-md font-bold flex p-3 space-x-10 bg-[#5B9A18] hover:bg-[#71B81D] hover:p-4">
+    <div className="border-black md:w-[40vw] border-2 h-[7.5vh] rounded-md font-bold flex p-3 space-x-10 bg-[#192841] hover:bg-[#203354] hover:p-4">
       <div className="flex-1">{user.slice(0, -10)}</div>
       <a href={file[0]?.url} target="_blank">
         <i className="fa-solid fa-eye"></i>

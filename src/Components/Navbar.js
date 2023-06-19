@@ -18,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#011B10] flex gap-[2vw] md:gap-[1vw] text-white font-semibold md:text-lg px-[2.5vw] h-[8.5vh] md:h-[7.5vh] z-10 items-center fixed w-[100vw]">
+    <nav className="bg-[#192841] flex gap-[2vw] md:gap-[1vw] text-white font-semibold md:text-lg px-[2.5vw] h-[8.5vh] md:h-[7.5vh] z-10 items-center fixed w-[100vw]">
       <div className="flex">
         <div className="hover:text-[#86B049] hover:animate-bounce">M</div>
         <div className="hover:text-[#86B049] hover:animate-bounce">B</div>
@@ -42,6 +42,12 @@ const Navbar = () => {
         to="/contact"
       >
         Contact Us
+      </Link>
+      <Link
+        className="hover:font-bold hover:text-[#86B049] focus:text-[#86B049] focus:scale-x-105"
+        to="/exceldata"
+      >
+        Excel
       </Link>
       <div className="absolute right-[2.5vw]">
         {auth?.currentUser?.email === undefined ? (
