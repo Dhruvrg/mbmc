@@ -1,38 +1,43 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { auth } from "../config/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import userContext from "../context/userContext";
+import { db } from "../config/firebase";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
 
 const Login = () => {
-  const context = useContext(userContext);
-  const { setUserEmail } = context;
-
   const [showPassword, setShowPassword] = useState(false);
   const [credentials, setCredentials] = useState({
-    email: "",
+    name: "",
     password: "",
   });
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { email, password } = credentials;
+    const { name, password } = credentials;
 
     try {
-      await signInWithEmailAndPassword(auth, email.trim(), password.trim());
-      toast("Login Successfully", "success");
-      setUserEmail(email.trim());
-      if (email.slice(0, -10).slice(-3) === "108") {
-        localStorage.setItem("cred", true);
+      const data = await getDocs(collection(db, "users"));
+      const filterData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }))[0].allusers;
+      const user = filterData.find((item) => item["user"] === name.trim());
+      if (
+        name !== "admin123" &&
+        (user?.length === 0 || user?.password !== password.trim())
+      ) {
+        toast("Enter right credentials", "danger");
+        return;
       }
+      toast("Login Successfully", "success");
+      localStorage.setItem("username", name.trim());
       navigate("/");
     } catch (error) {
-      toast("Invalid Detials", "danger");
+      toast("Some error occur", "danger");
       console.error(error);
     }
   };
@@ -50,25 +55,26 @@ const Login = () => {
         <p className="mt-4 text-[1.125rem] leading-[1.625rem]">
           <span className="text-richblack-100">
             Build skills for today, tomorrow, and beyond
-          </span>{" "}
+          </span>
           <span className="font-edu-sa font-bold italic text-blue-100">
             Education to future-proof your career
           </span>
         </p>{" "}
         <ToastContainer />
         <form onSubmit={handleSubmit}>
-          <label className="w-full" htmlFor="phoneNo">
+          <label className="w-full" htmlFor="name">
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
-              Email Address <sup className="text-pink-200">*</sup>
+              Username <sup className="text-pink-200">*</sup>
             </p>
             <input
               type="text"
-              id="email"
-              name="email"
+              id="name"
+              name="name"
+              required
               onChange={onChange}
-              value={credentials.email}
+              value={credentials.name}
               aria-describedby="emailHelp"
-              placeholder="Enter email address"
+              placeholder="Enter Username"
               style={{
                 boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
               }}
@@ -85,6 +91,7 @@ const Login = () => {
               onChange={onChange}
               id="password"
               name="password"
+              required
               aria-describedby="emailHelp"
               placeholder="Enter Password"
               style={{
@@ -94,7 +101,7 @@ const Login = () => {
             />
             <span
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+              className="absolute right-3 top-[70px] z-[10] cursor-pointer"
             >
               {showPassword ? (
                 <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />

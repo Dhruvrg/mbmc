@@ -1,16 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../config/firebase";
-import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   let navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
-      localStorage.removeItem("cred");
+      localStorage.removeItem("username");
       navigate("/login");
     } catch (error) {
       console.error(error);
@@ -31,26 +28,30 @@ const Navbar = () => {
       >
         Home
       </Link>
-      <Link
-        className="hover:font-bold hover:text-[#86B049] focus:text-[#86B049] focus:scale-x-105"
-        to="/upload"
-      >
-        Upload
-      </Link>
+      {localStorage.getItem("username") === "admin123" ? (
+        <Link
+          className="hover:font-bold hover:text-[#86B049] focus:text-[#86B049] focus:scale-x-105"
+          to="/upload"
+        >
+          Upload
+        </Link>
+      ) : null}
+      {localStorage.getItem("username") ? (
+        <Link
+          className="hover:font-bold hover:text-[#86B049] focus:text-[#86B049] focus:scale-x-105"
+          to="/exceldata"
+        >
+          Excel
+        </Link>
+      ) : null}
       <Link
         className="hover:font-bold hover:text-[#86B049] focus:text-[#86B049] focus:scale-x-105"
         to="/contact"
       >
         Contact Us
       </Link>
-      <Link
-        className="hover:font-bold hover:text-[#86B049] focus:text-[#86B049] focus:scale-x-105"
-        to="/exceldata"
-      >
-        Excel
-      </Link>
       <div className="absolute right-[2.5vw]">
-        {auth?.currentUser?.email === undefined ? (
+        {!localStorage.getItem("username") ? (
           <form className="flex gap-[2.5vw]">
             <Link
               className="hover:font-bold hover:text-[#86B049] focus:text-[#86B049] focus:scale-x-105"
@@ -58,13 +59,6 @@ const Navbar = () => {
               role="button"
             >
               Login
-            </Link>
-            <Link
-              className="hover:font-bold hover:text-[#86B049] focus:text-[#86B049] focus:scale-x-105"
-              to="/signup"
-              role="button"
-            >
-              Signup
             </Link>
           </form>
         ) : (

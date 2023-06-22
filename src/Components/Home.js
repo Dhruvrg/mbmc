@@ -1,13 +1,24 @@
 import React, { useContext, useEffect } from "react";
 import userContext from "../context/userContext";
+import { hash, compare, genSalt } from "bcryptjs";
 
 const Home = () => {
   const context = useContext(userContext);
-  const { allUsers, allFiles } = context;
+  const { allFiles } = context;
+
+  const pas = async () => {
+    // const password = "dhruv";
+    // const salt = await genSalt(10);
+    // const secPass = await hash(password, salt);
+    // const passwordCompare = await compare(
+    //   password,
+    //   "$2a$10$rulqYlbEgxebvLsNyyQ/EO8ycTGXlYuHGnWKLhThjU5ZdnfM4sDaS"
+    // );
+  };
 
   useEffect(() => {
-    allUsers();
     allFiles();
+    pas();
   }, []);
 
   return (
