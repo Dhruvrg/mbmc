@@ -1,18 +1,26 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import userContext from "../context/userContext";
+import Row from "./Row";
 
 const ExcelData = () => {
   const context = useContext(userContext);
-  const { twoDArray, allUsers, allFiles, excelData } = context;
+  const { twoDArray, allFiles, excelData, list, users } = context;
 
   useEffect(() => {
-    allUsers();
     allFiles();
     twoDArray();
     // eslint-disable-next-line
   }, []);
 
   const exportToCsv = async () => {
+    let result = [];
+    users.forEach((user) => {
+      const file = list.filter((item) => item.name.split(".")[0] === user);
+      result.push([
+        user[0],
+        file[0]?.url === undefined ? "Not Uploaded" : "Uploaded",
+      ]);
+    });
     var CsvString = "User,url\r\n";
     excelData.forEach((rowItem) => {
       rowItem.forEach((colItem) => {
@@ -31,34 +39,25 @@ const ExcelData = () => {
   return (
     <div className="w-[100vw] h-[100vh] bg-richblack-900 text-white justify-center flex flex-col">
       <div className="flex justify-center font-extrabold text-2xl mb-[10vh]">
-        <button className="" onClick={() => exportToCsv()}>
-          Download
-        </button>
+        <button onClick={() => exportToCsv()}>Download</button>
       </div>
-      <table className="mx-[25vw]">
-        <tr className="bg-[#192841]">
-          <th className="border-2 border-blue-100 py-[2vw]">Name</th>
-          <th className="border-2 border-blue-100 py-[2vw]">Status</th>
-        </tr>
+      <div className="flex flex-col items-center">
+        <div className="flex items-center">
+          <div className="border-2 border-blue-100 font-bold text-lg py-[2.5vh] text-center w-[22.5vw] bg-[#192841]">
+            UserName
+          </div>
+          <div className="border-2 border-blue-100 font-bold text-lg py-[2.5vh] text-center w-[12.5vw] bg-[#192841]">
+            Status
+          </div>
+          <div className="border-2 border-blue-100 font-bold text-lg py-[2.5vh] text-center w-[7.5vw] bg-[#192841]">
+            Files
+          </div>
+          <div className="w-[5vw]"></div>
+        </div>
         {excelData?.map((user) => (
-          <tr key={user[0]}>
-            <td className="border-2 border-blue-100 px-[1vw] text-center">
-              {user[0].slice(0, -10)}
-            </td>
-            {user[1] === "Not Uploaded" ? (
-              <td className="border-2 border-blue-100 px-[1vw] text-center bg-[#FF160C] text-black">
-                Not Uploaded
-              </td>
-            ) : (
-              <td className="border-2 border-blue-100 px-[1vw] text-center bg-[#00FF00] text-black">
-                <a href={user[1]} target="_blank">
-                  Uploaded
-                </a>
-              </td>
-            )}
-          </tr>
+          <Row key={user[0]} user={user} />
         ))}
-      </table>
+      </div>
     </div>
   );
 };

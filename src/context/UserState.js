@@ -1,29 +1,23 @@
 import { useState } from "react";
 import UserContext from "./userContext";
-import { collection, getDocs } from "firebase/firestore";
-import { db, storage } from "../config/firebase";
+import { storage } from "../config/firebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 
 const UserState = (props) => {
   const key = "108";
   const [list, setList] = useState([]);
-  const [users, setUser] = useState([]);
-  const [count, setCount] = useState(0);
-  const [userEmail, setUserEmail] = useState("");
   const [excelData, setExcelData] = useState([]);
 
-  const allUsers = async () => {
-    try {
-      const data = await getDocs(collection(db, "users"));
-      setUser(
-        data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))[0].allusers
-      );
-      const admins = users.filter((item) => item.slice(-13, -10) === "108");
-      setCount(admins.length);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const users = [
+    ["उद्यान विभाग", "user1"],
+    ["घनकचरा व्यवस्थापन विभाग", "user2"],
+    ["वैद्यकीय आरोग्य विभाग", "user3"],
+    ["माहिती व तंत्रज्ञान विभाग", "user4"],
+    ["पर्यावरण विभाग", "user5"],
+    ["बांधकाम व विद्यत विभाग", "user6"],
+    ["पाणी पुरवठा व मलनिःसारण विभाग", "user7"],
+    ["वाहन / परवन विभाग", "user8"],
+  ];
 
   const allFiles = async () => {
     const data = await listAll(ref(storage));
@@ -42,12 +36,11 @@ const UserState = (props) => {
   const twoDArray = () => {
     let result = [];
     users.forEach((user) => {
-      const file = list.filter(
-        (item) => item.name.split(".")[0] === user.slice(0, -10)
-      );
+      const file = list.filter((item) => item.name.split(".")[0] === user[1]);
       result.push([
         user,
-        file[0]?.url === undefined ? "Not Uploaded" : file[0]?.url,
+        file.length === 0 ? "Not Uploaded" : file,
+        file.length,
       ]);
     });
     setExcelData(result);
@@ -57,14 +50,10 @@ const UserState = (props) => {
     <UserContext.Provider
       value={{
         list,
-        count,
+        setList,
         key,
         users,
-        allUsers,
         allFiles,
-        userEmail,
-        setUserEmail,
-        count,
         twoDArray,
         excelData,
       }}
