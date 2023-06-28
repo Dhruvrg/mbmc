@@ -150,11 +150,14 @@ const ContactUsForm = () => {
         )}
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 ">
         <label htmlFor="message" className="lable-style">
-          Message
+          Pledge
         </label>
-        <textarea
+        <p className="form-style">
+          jrhjkaerf afjksadhfdf jfjdfiouhf fjzkhfhafsmasffba fhffjkfh ajksfbasdf 
+        </p>
+        {/* <textarea
           name="message"
           id="message"
           cols="30"
@@ -167,8 +170,14 @@ const ContactUsForm = () => {
           <span className="-mt-1 text-[12px] text-yellow-100">
             Please enter your Message.
           </span>
-        )}
+        )} */}
+        
       </div>
+      <div className=" -mt-4">
+      <input type="checkbox" name="confirm" value="confirm" required className="mx-1"/>
+      <label className="text-white font-semibold">I agree the above pledege</label>
+      </div>
+      
 
       <button
         disabled={loading}

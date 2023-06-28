@@ -48,20 +48,17 @@ const Login = () => {
 
   return (
     <div className="bg-richblack-900 h-[100vh] pt-[25vh] px-[10vw] mx-auto flex flex-col-reverse justify-between gap-y-12 md:flex-row md:gap-y-0 md:gap-x-12">
-      <div className="mx-auto w-11/12 max-w-[450px] md:mx-0">
+      <div className="mx-auto w-11/12 max-w-[450px] md:mx-0   ">
         <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">
           Welcome Back
         </h1>
-        <p className="mt-4 text-[1.125rem] leading-[1.625rem]">
+        <p className="mt-1 text-[1.125rem] leading-[1.625rem]">
           <span className="text-richblack-100">
-            Build skills for today, tomorrow, and beyond
-          </span>
-          <span className="font-edu-sa font-bold italic text-blue-100">
-            Education to future-proof your career
+            Login to Majhi Vasundhara Abhiyan
           </span>
         </p>{" "}
         <ToastContainer />
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className=" mt-4">
           <label className="w-full" htmlFor="name">
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
               Username <sup className="text-pink-200">*</sup>
@@ -109,11 +106,11 @@ const Login = () => {
                 <AiOutlineEye fontSize={24} fill="#AFB2BF" />
               )}
             </span>
-            <Link to="/forgot-password">
+            {/* <Link to="/forgot-password">
               <p className="mt-1 ml-auto max-w-max text-xs text-blue-100">
                 Forgot Password
               </p>
-            </Link>
+            </Link> */}
           </label>
           <button
             className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
@@ -123,7 +120,7 @@ const Login = () => {
           </button>
         </form>
       </div>
-      <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0">
+      <div className="relative   mx-auto w-11/12 max-w-[450px] md:mx-0 sm:block hidden ">
         <img
           src="https://cdn.dribbble.com/users/1897588/screenshots/3820679/login.gif"
           alt="Students"
