@@ -66,12 +66,12 @@ const Row = ({ user }) => {
       user[2] !== 0 &&
       (user[0][1] === localStorage.getItem("username") ||
         "admin123" === localStorage.getItem("username")) ? (
-        <div className="absolute w-[10vw] left-[15vw] rounded-s-lg bg-caribbeangreen-300">
+        <div className="absolute w-1/5 left-[5vw] p-2 rounded-2xl bg-caribbeangreen-300">
           {user[1]?.map((item) => (
             <div key={item.url} className="flex">
-              <a href={item?.url} target="_blank" className="flex-1">
+              <a href={item?.url} target="_blank" className="flex-1 w-4/5">
                 <div
-                  className="text-center"
+                  className="text-center  "
                   style={{
                     color: `${
                       item?.name.split(".")[2] !== "pdf" ? "#FF0000" : "white"
@@ -88,9 +88,10 @@ const Row = ({ user }) => {
           ))}
         </div>
       ) : null}
-      <div
+      <div 
         onClick={() => setShowUpload(!showUpload)}
-        className="border-2 border-blue-100 py-[1vh] text-center w-[22.5vw]"
+        className={`border-2 border-blue-100 py-[1vh] text-center w-[22.5vw] ${user[0][1] === localStorage.getItem("username") ||
+        "admin123" === localStorage.getItem("username")?"hover:scale-110 delay-150 transition-all" : ""}`}
       >
         {user[0][0]}
       </div>
@@ -113,7 +114,7 @@ const Row = ({ user }) => {
           <div className="flex justify-center items-center">
             {selectedFile ? (
               <button
-                className="bg-green-700 rounded-md"
+                className="bg-caribbeangreen-300 p-2 rounded-xl hover:scale-110 transition-all delay-200"
                 onClick={handleSubmission}
               >
                 Submit
@@ -123,7 +124,7 @@ const Row = ({ user }) => {
                 type="file"
                 name="file"
                 onChange={changeHandler}
-                className="w-[5vw]"
+                className="absolute right-44 bg-caribbeangreen-300 rounded-xl text-center "
               />
             )}
           </div>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import userContext from "../context/userContext";
-import { hash, compare, genSalt } from "bcryptjs";
+// import { hash, compare, genSalt } from "bcryptjs";
 
 const Home = () => {
   const context = useContext(userContext);

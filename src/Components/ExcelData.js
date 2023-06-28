@@ -37,7 +37,7 @@ const ExcelData = () => {
   };
 
   return (
-    <div className="w-[100vw] h-[100vh] bg-richblack-900 text-white justify-center flex flex-col">
+    <div className="w-[100vw] h-[100vh] bg-richblack-900 text-white justify-center  flex flex-col">
       <div className="flex justify-center font-extrabold text-2xl mb-[10vh]">
         <button onClick={() => exportToCsv()}>Download</button>
       </div>

@@ -14,7 +14,7 @@ const Contact = () => {
     <div className=" bg-richblack-900">
       <div className="mx-auto  flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white lg:flex-row">
         {/* Contact Details */}
-        <div className="lg:w-[40%]">
+        <div className=" sm:block lg:w-[40%] hidden ">
           <ContactDetails />
         </div>
 
