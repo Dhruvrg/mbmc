@@ -154,9 +154,9 @@ const ContactUsForm = () => {
         <label htmlFor="message" className="lable-style">
           Pledge
         </label>
-        <p className="form-style">
-          jrhjkaerf afjksadhfdf jfjdfiouhf fjzkhfhafsmasffba fhffjkfh ajksfbasdf 
-        </p>
+        <a href="https://majhivasundhara.in/en/lets-pledge"  className="form-style transition-all duration-200 hover:scale-110 hover:shadow-none">
+        Click Me
+        </a>
         {/* <textarea
           name="message"
           id="message"
@@ -175,7 +175,7 @@ const ContactUsForm = () => {
       </div>
       <div className=" -mt-4">
       <input type="checkbox" name="confirm" value="confirm" required className="mx-1"/>
-      <label className="text-white font-semibold">I agree the above pledege</label>
+      <label className="text-white font-semibold">I agree that I had given pledge above website</label>
       </div>
       
 

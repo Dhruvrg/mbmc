@@ -15,13 +15,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#192841] flex gap-[2vw] md:gap-[1vw] text-white font-semibold md:text-lg px-[2.5vw] h-[8.5vh] md:h-[7.5vh] z-10 items-center fixed w-[100vw]">
-      <div className="flex">
-        <div className="hover:text-[#86B049] hover:animate-bounce">M</div>
-        <div className="hover:text-[#86B049] hover:animate-bounce">B</div>
-        <div className="hover:text-[#86B049] hover:animate-bounce">M</div>
-        <div className="hover:text-[#86B049] hover:animate-bounce">C</div>
-      </div>
+    <nav className="bg-[#3FA710] flex gap-[2vw] md:gap-[1vw] text-white font-semibold md:text-lg px-[2.5vw] h-[8.5vh] md:h-[7.5vh] z-10 items-center fixed w-[100vw] rounded-md">
+      <img src="https://majhivasundhara.in//assets/images/header_logo.png" width={60} alt="logo"/>
       <Link
         className="hover:font-bold hover:text-[#86B049] focus:text-[#86B049] focus:scale-x-105"
         to="/"

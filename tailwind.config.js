@@ -23,7 +23,7 @@ module.exports = {
         600: "#424854",
         700: "#2C333F",
         800: "#161D29",
-        900: "#000814",
+        900: "#AEF359",
       },
       richblue: {
         5: "#ECF5FF",
@@ -123,6 +123,9 @@ module.exports = {
         800: "#171717",
         900: "#141414",
       },
+      "graident":{
+        400:"bg-gradient-to-r from-indigo-500"
+      }
     },
     extend: {
       maxWidth: {

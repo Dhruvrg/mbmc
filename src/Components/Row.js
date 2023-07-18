@@ -82,7 +82,7 @@ const Row = ({ user }) => {
                 </div>
               </a>
               <div onClick={() => deleteAFile(item.name)} className="mr-[1vw]">
-                <i className="fa-solid fa-trash-can"></i>
+                <i className="fa-solid fa-trash-can hover:cursor-pointer"></i>
               </div>
             </div>
           ))}
@@ -90,23 +90,23 @@ const Row = ({ user }) => {
       ) : null}
       <div 
         onClick={() => setShowUpload(!showUpload)}
-        className={`border-2 border-blue-100 py-[1vh] text-center w-[22.5vw] ${user[0][1] === localStorage.getItem("username") ||
-        "admin123" === localStorage.getItem("username")?"hover:scale-110 delay-150 transition-all" : ""}`}
+        className={`text-black border-2 border-black py-[1vh] text-center w-[22.5vw] ${user[0][1] === localStorage.getItem("username") ||
+        "admin123" === localStorage.getItem("username")?"hover:scale-110 delay-150 transition-all hover:cursor-pointer" : ""}`}
       >
         {user[0][0]}
       </div>
       <div>
         {user[1] === "Not Uploaded" ? (
-          <div className="border-2 border-blue-100 py-[1vh] text-center w-[12.5vw] bg-[#FF160C] text-black">
+          <div className="border-2 border-black py-[1vh] text-center w-[12.5vw] bg-[#FF160C] text-black">
             Not Uploaded
           </div>
         ) : (
-          <div className="border-2 border-blue-100 py-[1vh] text-center w-[12.5vw] bg-[#00FF00] text-black">
+          <div className="border-2 border-black py-[1vh] text-center w-[12.5vw] bg-[#00FF00] text-black">
             Uploaded
           </div>
         )}
       </div>
-      <div className="border-2 border-blue-100 py-[1vh] text-center w-[7.5vw]">
+      <div className="border-2  text-black border-black py-[1vh] text-center w-[7.5vw]">
         {user[2]}
       </div>
       <div className="w-[5vw] mt-[1vh] flex justify-center">

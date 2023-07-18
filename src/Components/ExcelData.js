@@ -38,18 +38,18 @@ const ExcelData = () => {
 
   return (
     <div className="w-[100vw] h-[100vh] bg-richblack-900 text-white justify-center  flex flex-col">
-      <div className="flex justify-center font-extrabold text-2xl mb-[10vh]">
+      <div className="flex justify-center font-extrabold text-2xl mb-[10vh] text-[#3FA710]">
         <button onClick={() => exportToCsv()}>Download</button>
       </div>
       <div className="flex flex-col items-center">
         <div className="flex items-center">
-          <div className="border-2 border-blue-100 font-bold text-lg py-[2.5vh] text-center w-[22.5vw] bg-[#192841]">
+          <div className="border-2 border-black font-bold text-lg py-[2.5vh] text-center w-[22.5vw] bg-[#192841]">
             UserName
           </div>
-          <div className="border-2 border-blue-100 font-bold text-lg py-[2.5vh] text-center w-[12.5vw] bg-[#192841]">
+          <div className="border-2 border-black font-bold text-lg py-[2.5vh] text-center w-[12.5vw] bg-[#192841]">
             Status
           </div>
-          <div className="border-2 border-blue-100 font-bold text-lg py-[2.5vh] text-center w-[7.5vw] bg-[#192841]">
+          <div className="border-2 border-black font-bold text-lg py-[2.5vh] text-center w-[7.5vw] bg-[#192841]">
             Files
           </div>
           <div className="w-[5vw]"></div>

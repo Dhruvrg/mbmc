@@ -48,7 +48,7 @@ const Login = () => {
 
   return (
     <div className="bg-richblack-900 h-[100vh] pt-[25vh] px-[10vw] mx-auto flex flex-col-reverse justify-between gap-y-12 md:flex-row md:gap-y-0 md:gap-x-12">
-      <div className="mx-auto w-11/12 max-w-[450px] md:mx-0   ">
+      <div className="p-8 mx-auto w-11/12 max-w-[450px] md:mx-0 bg-richblack-800 h-fit rounded-xl ">
         <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">
           Welcome Back
         </h1>
@@ -79,7 +79,7 @@ const Login = () => {
             />
           </label>
           <label htmlFor="password" className="relative">
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">
+            <p className="mb-1 mt-4 text-[0.875rem] leading-[1.375rem] text-richblack-5">
               Password <sup className="text-pink-200">*</sup>
             </p>
             <input
@@ -113,7 +113,7 @@ const Login = () => {
             </Link> */}
           </label>
           <button
-            className="mt-6 rounded-[8px] bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-900"
+            className="mt-6 rounded-[8px]  bg-yellow-50 py-[8px] px-[12px] font-medium text-richblack-800"
             type="submit"
           >
             LOGIN
@@ -122,7 +122,7 @@ const Login = () => {
       </div>
       <div className="relative   mx-auto w-11/12 max-w-[450px] md:mx-0 sm:block hidden ">
         <img
-          src="https://cdn.dribbble.com/users/1897588/screenshots/3820679/login.gif"
+          src="https://majhivasundhara.in//assets/images/header_logo.png"
           alt="Students"
           width={558}
           height={558}
