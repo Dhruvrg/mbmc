@@ -22,8 +22,17 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="w-[100vw] h-[100vh] pt-[7.5vh] md:pb-0 pb-[20vh] bg-richblack-900 text-white flex justify-center items-center font-extrabold text-6xl">
-      Home
+    <div className=" w-[100vw] h-[100vh] pt-[10vh] md:pb-0 pb-[20vh] flex flex-col justify-start items-center font-bold text-6xl">
+      <img src="https://mbmcgardencity.com/wp-content/uploads/2022/02/MBMC-Logo.png" alt="header"/>
+     <div> <p>Mazhi vasundara abhiyamn 4.0</p></div>
+     <div>
+      <p className="text-[#3FA710] underline p-4">MIS</p>
+     </div>
+     <div>
+      <p className=" text-2xl">
+        marathi me kuch to 
+      </p>
+     </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import Navbar from "./Components/Navbar";
 import Home from "./Components/Home";
-import About from "./Components/About";
+import Footer from "./Components/Footer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Upload from "./Components/Upload";
@@ -22,7 +22,7 @@ function App() {
             <Route exact path="/contact" element={<Contact />} />
             <Route exact path="/exceldata" element={<ExcelData />} />
           </Routes>
-          <About />
+          <Footer />
         </Router>
       </UserState>
     </div>
