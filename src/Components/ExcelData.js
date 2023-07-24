@@ -37,12 +37,12 @@ const ExcelData = () => {
   };
 
   return (
-    <div className="w-[100vw] h-[100vh] bg-richblack-900 text-white justify-center  flex flex-col">
+    <div className="w-[100vw] h-[100vh] bg-richblack-900 text-white justify-center flex flex-col">
       <div className="flex justify-center font-extrabold text-2xl mb-[10vh] text-[#3FA710]">
         <button onClick={() => exportToCsv()}>Download</button>
       </div>
-      <div className="flex flex-col items-center overflow-x-scroll md:overflow-x-hidden">
-        <div className="flex items-center">
+      <div className="md:ml-[10vw] mx-[2.5vw] z-50 flex flex-col md:items-center overflow-x-scroll md:overflow-x-hidden">
+        <div className="w-[195vw] md:w-[68vw] flex items-center">
           <div className="border-2 border-black font-bold text-lg py-[2.5vh] text-center w-[65vw] md:w-[22.5vw] bg-[#192841]">
             UserName
           </div>

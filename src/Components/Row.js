@@ -60,13 +60,13 @@ const Row = ({ user }) => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex w-[195vw] md:w-[67.5vw]">
       <ToastContainer />
       {showUpload &&
       user[2] !== 0 &&
       (user[0][1] === localStorage.getItem("username") ||
         "admin123" === localStorage.getItem("username")) ? (
-        <div className="absolute w-1/5 left-[5vw] p-2 rounded-2xl bg-caribbeangreen-300">
+        <div className="absolute md:w-[15%] w-[60vw] left-[5vw] p-2 rounded-2xl bg-caribbeangreen-300">
           {user[1]?.map((item) => (
             <div key={item.url} className="flex">
               <a href={item?.url} target="_blank" className="flex-1 w-4/5">
@@ -90,10 +90,10 @@ const Row = ({ user }) => {
       ) : null}
       <div
         onClick={() => setShowUpload(!showUpload)}
-        className={`text-black border-2 border-black py-[1vh] text-center w-[65vw] md:w-[22.5vw] ${
+        className={`text-black line-clamp-1 border-2 border-black py-[1vh] text-center w-[65vw] md:w-[22.5vw] ${
           user[0][1] === localStorage.getItem("username") ||
           "admin123" === localStorage.getItem("username")
-            ? "hover:scale-110 delay-150 transition-all hover:cursor-pointer"
+            ? "md:hover:scale-110 md:delay-150 md:transition-all md:hover:cursor-pointer"
             : ""
         }`}
       >
@@ -110,15 +110,15 @@ const Row = ({ user }) => {
           </div>
         )}
       </div>
-      <div className="border-2  text-black border-black py-[1vh] text-center w-[65vw] md:w-[22.5vw]">
+      <div className="border-2 text-black border-black py-[1vh] text-center w-[65vw] md:w-[22.5vw]">
         {user[2]}
       </div>
-      <div className="w-[5vw] mt-[1vh] flex justify-center">
+      <div className="w-[5vw] mt-[1vh]">
         {showUpload && user[0][1] === localStorage.getItem("username") ? (
-          <div className="flex justify-center items-center">
+          <div className="">
             {selectedFile ? (
               <button
-                className="bg-caribbeangreen-300 p-2 rounded-xl hover:scale-110 transition-all delay-200"
+                className="bg-caribbeangreen-300 p-1 rounded-xl hover:scale-110 transition-all delay-200"
                 onClick={handleSubmission}
               >
                 Submit
@@ -128,7 +128,7 @@ const Row = ({ user }) => {
                 type="file"
                 name="file"
                 onChange={changeHandler}
-                className="absolute right-44 bg-caribbeangreen-300 rounded-xl text-center "
+                className="absolute md:right-18 md:w-[7vw] w-[25vw] bg-caribbeangreen-300 rounded-xl text-center "
               />
             )}
           </div>
