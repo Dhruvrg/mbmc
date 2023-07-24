@@ -47,7 +47,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-richblack-900 h-[100vh] pt-[25vh] px-[10vw] mx-auto flex flex-col-reverse justify-between gap-y-12 md:flex-row md:gap-y-0 md:gap-x-12">
+    <div className="bg-richblack-900 h-[100vh] pb-[25vh] md:pt-[25vh] md:pb-0 px-[10vw] mx-auto flex flex-col-reverse justify-between gap-y-12 md:flex-row md:gap-y-0 md:gap-x-12">
       <div className="p-8 mx-auto w-11/12 max-w-[450px] md:mx-0 bg-richblack-800 h-fit rounded-xl ">
         <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">
           Welcome Back
@@ -98,7 +98,7 @@ const Login = () => {
             />
             <span
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-3 top-[70px] z-[10] cursor-pointer"
+              className="absolute right-3 top-[90px] z-[10] cursor-pointer"
             >
               {showPassword ? (
                 <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />

@@ -30,7 +30,7 @@ const UploadItem = ({ file }) => {
 
   return (
     <div className="border-black md:w-[40vw] border-2 h-[7.5vh] rounded-md font-bold flex p-3 pr-6 space-x-5 bg-[#192841] hover:bg-[#203354] hover:p-4">
-      <div className="flex-1">
+      <div className="flex-1 line-clamp-1">
         {name[0]} ({file?.name.split(".")[1]})
       </div>
       <a href={file?.url} target="_blank" download>
