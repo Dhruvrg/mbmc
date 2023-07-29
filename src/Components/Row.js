@@ -118,7 +118,7 @@ const Row = ({ user }) => {
           <div className="">
             {selectedFile ? (
               <button
-                className="bg-caribbeangreen-300 p-1 rounded-xl hover:scale-110 transition-all delay-200"
+                className="bg-caribbeangreen-300  p-1 rounded-xl hover:scale-110 transition-all delay-200"
                 onClick={handleSubmission}
               >
                 Submit
@@ -128,7 +128,7 @@ const Row = ({ user }) => {
                 type="file"
                 name="file"
                 onChange={changeHandler}
-                className="absolute md:right-18 md:w-[7vw] w-[25vw] bg-caribbeangreen-300 rounded-xl text-center "
+                className="absolute md:mr-0 md:w-[7vw] w-[25vw] bg-caribbeangreen-300 rounded-xl text-center "
               />
             )}
           </div>
